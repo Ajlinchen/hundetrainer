@@ -1,66 +1,544 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meine erste KI-Website</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header class="hero">
-      <nav>
-        <strong>Meine Website</strong>
-        <a href="#idee">Idee</a>
-        <a href="#features">Features</a>
-        <a href="#kontakt">Kontakt</a>
-      </nav>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hunderatgeber - Alles über deine Hunde</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      <section>
-        <p class="eyebrow">Gebaut im Vibe-Coding-Kurs</p>
-        <h1>Meine erste eigene Website mit KI</h1>
-        <p>
-          Diese Seite wurde mit VS Code, Continue und GitHub Pages erstellt.
-        </p>
-        <a class="button" href="#idee">Los geht's</a>
-      </section>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            background-color: rgba(255, 140, 0, 0.9);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #FF8C00;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px;
+            background-color: #FF8C00;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            min-width: 120px;
+        }
+
+        .tab-button:hover {
+            background-color: #FF7700;
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background-color: #FF6500;
+            border-bottom: 3px solid white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-content h2 {
+            color: #FF8C00;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .tab-content h3 {
+            color: #FF7700;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .tab-content p {
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .tab-content ul {
+            list-style: none;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .tab-content li {
+            color: #333;
+            margin-bottom: 10px;
+            line-height: 1.6;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .tab-content li:before {
+            content: "🐾";
+            position: absolute;
+            left: 0;
+            color: #FF8C00;
+        }
+
+        .sidebar {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .dog-container {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: moveRight 4s infinite;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        @keyframes moveRight {
+            0%, 100% {
+                right: 20px;
+            }
+            50% {
+                right: 40px;
+            }
+        }
+
+        .dog {
+            font-size: 60px;
+            animation: wave 0.6s infinite;
+            margin-bottom: 10px;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(-5deg);
+            }
+            75% {
+                transform: rotate(5deg);
+            }
+        }
+
+        .bandana {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background-color: red;
+            top: 25px;
+            left: 15px;
+            border-radius: 5px;
+            transform: rotate(45deg);
+        }
+
+        .tip-box {
+            background-color: white;
+            border: 3px solid #FF8C00;
+            border-radius: 10px;
+            padding: 15px;
+            font-size: 0.9em;
+            line-height: 1.6;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .tip-box strong {
+            color: #FF8C00;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .info-box {
+            background-color: #FFF3E0;
+            border-left: 5px solid #FF8C00;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: #FF8C00;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+            }
+
+            .dog-container {
+                width: 120px;
+                height: 120px;
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .dog {
+                font-size: 45px;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🐕 Hunderatgeber 🐕</h1>
+        <p>Dein Begleiter für gesunde und glückliche Hunde</p>
     </header>
 
-    <main>
-      <section id="idee" class="section">
-        <h2>Die Idee</h2>
-        <p>
-          Hier steht später die Idee für diese Website. Zum Beispiel: ein Café,
-          ein Portfolio, ein kleines Produkt oder eine Event-Seite.
-        </p>
-      </section>
+    <div class="container">
+        <div class="main-content">
+            <div class="tabs">
+                <button class="tab-button active" onclick="openTab(event, 'anatomie')">Anatomie</button>
+                <button class="tab-button" onclick="openTab(event, 'erziehung')">Erziehung</button>
+                <button class="tab-button" onclick="openTab(event, 'ernaehrung')">Ernährung</button>
+                <button class="tab-button" onclick="openTab(event, 'gesundheit')">Gesundheit</button>
+                <button class="tab-button" onclick="openTab(event, 'pflege')">Pflege</button>
+            </div>
 
-      <section id="features" class="cards">
-        <article>
-          <h3>Schnell gebaut</h3>
-          <p>Wir ändern die Website Schritt für Schritt mit KI-Unterstützung.</p>
-        </article>
+            <!-- Tab: Anatomie -->
+            <div id="anatomie" class="tab-content active">
+                <h2>🦴 Anatomie des Hundes</h2>
+                <p>Die Anatomie des Hundes ist perfekt an sein Wesen angepasst - ein intelligentes und agiles Tier mit beeindruckenden körperlichen Fähigkeiten.</p>
+                
+                <h3>Skelettstruktur</h3>
+                <ul>
+                    <li><strong>Wirbelsäule:</strong> Besteht aus 7 Hals-, 13 Brust-, 7 Lenden-, 3 Kreuzbein- und 20-23 Schwanzwirbeln</li>
+                    <li><strong>Rippen:</strong> 13 Paare schützen Herz und Lunge</li>
+                    <li><strong>Gliedmaßen:</strong> Vier starke Beine mit fünf Zehen vorne und vier hinten</li>
+                </ul>
 
-        <article>
-          <h3>Einfach gestaltet</h3>
-          <p>HTML und CSS reichen für eine ansehbare erste Website.</p>
-        </article>
+                <h3>Muskulatur</h3>
+                <ul>
+                    <li>Der Hund hat etwa 700 Muskeln, die für Kraft und Beweglichkeit essentiell sind</li>
+                    <li>Starke Hinterhand für Sprünge und schnelle Richtungswechsel</li>
+                    <li>Vorderpfoten ideal zum Greifen und Stützen</li>
+                </ul>
 
-        <article>
-          <h3>Online veröffentlicht</h3>
-          <p>GitHub Pages macht aus den Dateien eine öffentliche Website.</p>
-        </article>
-      </section>
+                <h3>Sinnesorgan</h3>
+                <ul>
+                    <li><strong>Geruchssinn:</strong> 10.000 bis 100.000 mal besser als beim Menschen</li>
+                    <li><strong>Gehör:</strong> Kann Frequenzen bis 65.000 Hz hören (Menschen: 20.000 Hz)</li>
+                    <li><strong>Sehvermögen:</strong> Gutes Nachtsehen, erkennt Bewegungen besser als Farben</li>
+                </ul>
 
-      <section id="kontakt" class="section">
-        <h2>Kontakt</h2>
-        <p>Kontakt: hello@example.com</p>
-      </section>
-    </main>
+                <div class="info-box">
+                    <strong>💡 Wissenswert:</strong> Die Zunge eines Hundes ist nicht nur zum Schmecken da - sie dient auch der Temperaturregulation durch Speichel-Verdunstung!
+                </div>
+            </div>
 
-    <footer>
-      <p>© 2026 Vibe-Coding-Kurs</p>
-    </footer>
+            <!-- Tab: Erziehung -->
+            <div id="erziehung" class="tab-content">
+                <h2>🎓 Hundeerziehung</h2>
+                <p>Eine gute Erziehung ist die Grundlage für einen glücklichen und wohlerzogenen Hund. Konsistenz und positive Verstärkung sind der Schlüssel.</p>
+                
+                <h3>Grundprinzipien</h3>
+                <ul>
+                    <li><strong>Positive Verstärkung:</strong> Belohne erwünschtes Verhalten mit Leckerlis oder Lob</li>
+                    <li><strong>Konsistenz:</strong> Alle Familienmitglieder sollten die gleichen Regeln durchsetzen</li>
+                    <li><strong>Geduld:</strong> Manche Hunde brauchen länger zum Lernen</li>
+                    <li><strong>Früh beginnen:</strong> Je jünger der Hund, desto einfacher ist die Erziehung</li>
+                </ul>
 
-    <script src="script.js"></script>
-  </body>
+                <h3>Wichtige Kommandos</h3>
+                <ul>
+                    <li><strong>Sitz:</strong> Das erste Kommando, das man beibringen sollte</li>
+                    <li><strong>Platz:</strong> Grundlegend für Sicherheit und Kontrolle</li>
+                    <li><strong>Fuß:</strong> Essentiell für Spaziergänge ohne Ziehen</li>
+                    <li><strong>Bleib:</strong> Wichtig für die Sicherheit in vielen Situationen</li>
+                    <li><strong>Komm:</strong> Lebensrettend in gefährlichen Situationen</li>
+                </ul>
+
+                <h3>Sozialisierung</h3>
+                <ul>
+                    <li>Exposé den Welpen verschiedenen Menschen, Tieren und Umgebungen aus</li>
+                    <li>Positive Erfahrungen in der frühen Phase prägen das ganze Leben</li>
+                    <li>Regelmäßiger Kontakt mit anderen Hunden für gutes Sozialverhalten</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Tipp:</strong> Trainingseinheiten sollten kurz (5-10 Minuten) und häufig stattfinden. Belohne sofort nach dem gewünschten Verhalten!
+                </div>
+            </div>
+
+            <!-- Tab: Ernährung -->
+            <div id="ernaehrung" class="tab-content">
+                <h2>🍖 Hundeernährung</h2>
+                <p>Die richtige Ernährung ist essentiell für die Gesundheit, Energie und Langlebigkeit deines Hundes.</p>
+                
+                <h3>Nährstoffbedarf</h3>
+                <ul>
+                    <li><strong>Protein:</strong> 18-25% für erwachsene Hunde, bis zu 30% für Welpen und Senioren</li>
+                    <li><strong>Fett:</strong> 5-15% für ein glänzendes Fell und Energieversorgung</li>
+                    <li><strong>Kohlenhydrate:</strong> Nicht essentiell, aber als Energiequelle nützlich</li>
+                    <li><strong>Vitamine und Mineralien:</strong> Besonders Kalzium und Phosphor für Knochengesundheit</li>
+                </ul>
+
+                <h3>Futtertypen</h3>
+                <ul>
+                    <li><strong>Trockenfutter:</strong> Praktisch, lange haltbar, gut für Zahngesundheit</li>
+                    <li><strong>Nassfutter:</strong> Hoher Feuchtigkeitsgehalt, gut für Hydration</li>
+                    <li><strong>Rohfütterung (BARF):</strong> Natürlich, aber erfordert genaue Portionierung</li>
+                    <li><strong>Selbstgekochtes Futter:</strong> Kontrolle über Zutaten, aber aufwändig</li>
+                </ul>
+
+                <h3>Fütterungsempfehlungen</h3>
+                <ul>
+                    <li><strong>Welpen:</strong> 3-4 Mahlzeiten täglich bis 6 Monate, dann 2-3</li>
+                    <li><strong>Erwachsene:</strong> 1-2 Mahlzeiten täglich</li>
+                    <li><strong>Senioren:</strong> Hochwertige Protein, leichter verdaulich</li>
+                    <li><strong>Portionsgröße:</strong> Richte dich nach Gewicht, Alter und Aktivitätslevel</li>
+                </ul>
+
+                <h3>Zu vermeidende Lebensmittel</h3>
+                <ul>
+                    <li>🚫 Schokolade und Koffein - giftig für Hunde</li>
+                    <li>🚫 Traubenkerne und Rosinen - können Nierenschäden verursachen</li>
+                    <li>🚫 Zwiebeln und Knoblauch - beschädigen rote Blutkörperchen</li>
+                    <li>🚫 Avocado - enthält Persin, das giftig ist</li>
+                    <li>🚫 Xylitol (künstlicher Süßstoff) - extrem giftig</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Tipp:</strong> Gib deinem Hund immer frisches Wasser zur Verfügung. Eine ausreichende Hydration ist genauso wichtig wie gutes Futter!
+                </div>
+            </div>
+
+            <!-- Tab: Gesundheit -->
+            <div id="gesundheit" class="tab-content">
+                <h2>❤️ Hundegesundheit</h2>
+                <p>Die Gesundheit deines Hundes sollte deine höchste Priorität sein. Prävention ist besser als Heilung!</p>
+                
+                <h3>Regelmäßige Vorsorgeuntersuchungen</h3>
+                <ul>
+                    <li><strong>Jährliche Besuche:</strong> Für gesunde Erwachsene Hunde</li>
+                    <li><strong>Zwei pro Jahr:</strong> Für Welpen und Senioren über 7 Jahren</li>
+                    <li><strong>Zahnkontrolle:</strong> Mindestens jährlich zur Vorbeugung von Zahnerkrankungen</li>
+                </ul>
+
+                <h3>Impfungen</h3>
+                <ul>
+                    <li><strong>Grundimmunisierung:</strong> Tollwut, Staupe, Hepatitis, Parvovirose</li>
+                    <li><strong>Auffrischungen:</strong> Jährlich oder nach Tierarzt-Empfehlung</li>
+                    <li><strong>Zusatzimpfungen:</strong> Je nach Lebensstil (Zeckenimpfung, etc.)</li>
+                </ul>
+
+                <h3>Parasitenschutz</h3>
+                <ul>
+                    <li><strong>Flöhe und Zecken:</strong> Monatliche Behandlung das ganze Jahr</li>
+                    <li><strong>Würmer:</strong> Entwurmung 4-6 mal jährlich bei Welpen, 1-2 mal bei Erwachsenen</li>
+                    <li><strong>Herzwürmer:</strong> Besonders in wärmeren Klimazonen wichtig</li>
+                </ul>
+
+                <h3>Häufige Gesundheitsprobleme</h3>
+                <ul>
+                    <li><strong>Übergewicht:</strong> Führt zu Gelenkproblemen, Diabetes und Herzkrankheiten</li>
+                    <li><strong>Ohrentzündungen:</strong> Besonders bei Hängeohren-Rassen</li>
+                    <li><strong>Zahnprobleme:</strong> Parodontale Erkrankungen sind weit verbreitet</li>
+                    <li><strong>Allergien:</strong> Können Futter- oder Umweltbedingt sein</li>
+                </ul>
+
+                <h3>Notfallsignale</h3>
+                <ul>
+                    <li>🚨 Erbrechen oder Durchfall länger als 24 Stunden</li>
+                    <li>🚨 Schwierigkeiten beim Atmen oder Husten</li>
+                    <li>🚨 Lethargie oder ungewöhnliche Verhaltensänderungen</li>
+                    <li>🚨 Verletzungen oder starke Blutungen</li>
+                    <li>🚨 Unfähigkeit zu urinieren oder zu defäkieren</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Tipp:</strong> Halte eine Krankenakte deines Hundes mit allen Impfungen, Behandlungen und medizinischen Besonderheiten. Dies ist besonders wichtig im Notfall!
+                </div>
+            </div>
+
+            <!-- Tab: Pflege -->
+            <div id="pflege" class="tab-content">
+                <h2>🛁 Hundepflege</h2>
+                <p>Regelmäßige Pflege trägt nicht nur zur Hygiene bei, sondern stärkt auch die Bindung zwischen dir und deinem Hund.</p>
+                
+                <h3>Fellpflege</h3>
+                <ul>
+                    <li><strong>Bürsten:</strong> 2-3 mal wöchentlich für kurzhaarige Hunde, täglich für langhaarige</li>
+                    <li><strong>Baden:</strong> Alle 4-6 Wochen mit speziellem Hundeshampoo</li>
+                    <li><strong>Trocknen:</strong> Nach dem Baden gründlich trocknen, um Hautirritationen zu vermeiden</li>
+                    <li><strong>Trimmen:</strong> Je nach Rasse regelmäßig by einen Groomer</li>
+                </ul>
+
+                <h3>Krallenpflege</h3>
+                <ul>
+                    <li>Schneide Krallen monatlich oder wenn sie Kratzen am Boden verursachen</li>
+                    <li>Lange Krallen können Schmerzen und Gangstörungen verursachen</li>
+                    <li>Verwende spezielle Hundekrallenschneider für Sicherheit</li>
+                </ul>
+
+                <h3>Zahnpflege</h3>
+                <ul>
+                    <li><strong>Zähneputzen:</strong> Idealerweise täglich oder mindestens 3-4 mal pro Woche</li>
+                    <li><strong>Zahnbürste:</strong> Verwende eine Hundezahnbürste und Hundezahnpasta</li>
+                    <li><strong>Zahnkausticks:</strong> Helfen, Plaque zu reduzieren und Atem zu verbessern</li>
+                </ul>
+
+                <h3>Ohrenpflege</h3>
+                <ul>
+                    <li>Überprüfe die Ohren wöchentlich auf Rötungen oder Verschmutzung</li>
+                    <li>Reinige sanft mit einem feuchten Tuch oder speziellen Ohrreinigungstüchern</li>
+                    <li>Besonders wichtig bei Rassen mit Hängeohren</li>
+                </ul>
+
+                <h3>Augenpflege</h3>
+                <ul>
+                    <li>Wische tägliche Ausflüsse mit einem sauberen, weichen Tuch weg</li>
+                    <li>Achte auf rote, geschwollene oder tränende Augen</li>
+                    <li>Kontaktiere einen Tierarzt, wenn du Veränderungen bemerkst</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>💡 Tipp:</strong> Mache die Pflege zu einem positiven Erlebnis mit Belohnungen und Lob. Dies stärkt die Bindung und macht zukünftige Pflegetermine einfacher!
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="dog-container" onclick="getDogTip()">
+                <div class="bandana"></div>
+                <div class="dog">🐶</div>
+                <div style="font-size: 0.8em; text-align: center; color: #FF8C00; font-weight: bold;">Klick mich!</div>
+            </div>
+
+            <div class="tip-box" id="tipBox">
+                <strong>💡 Hundetipp:</strong>
+                <span id="tipText">Klicke auf den Hund, um Tipps zur Hundegesundheit zu erhalten!</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tips = [
+            "Eine ausreichende Wasserzufuhr ist essentiell! Stelle sicher, dass dein Hund täglich mindestens 40-60 ml Wasser pro Kilogramm Körpergewicht trinkt.",
+            "Regelmäßige Bewegung ist wichtig für die Gesundheit. Ein Erwachsener Hund braucht mindestens 30 Minuten tägliche Aktivität.",
+            "Zahngesundheit ist oft übersehen. Putze die Zähne deines Hundes mindestens 3-4 mal pro Woche!",
+            "Übergewicht ist ein großes Gesundheitsrisiko. Halte dein Hund aktiv und füttre ihn mit angemessenen Portionen.",
+            "Regelmäßige Tierarztbesuche sind wichtig. Ein jährlicher Check-up kann ernsthafte Probleme früh erkennen.",
+            "Impfungen sind lebensrettend! Stelle sicher, dass dein Hund alle empfohlenen Impfungen erhält.",
+            "Parasitenschutz ist das ganze Jahr notwendig. Verwende monatliche Behandlungen gegen Flöhe und Zecken.",
+            "Stress kann die Gesundheit beeinflussen. Schaffe eine sichere und entspannende Umgebung für deinen Hund.",
+            "Altern ist natürlich. Senioren-Hunde brauchen spezielle Pflege und häufigere Tierarztbesuche.",
+            "Bewegung vor dem Fressen kann Magenprobleme verursachen. Warte mindestens 30 Minuten nach einem Spaziergang zum Füttern.",
+            "Krankenversicherung für Hunde kann dir helfen, Tierarztkosten zu bewältigen. Überlege, eine zu erwerben!",
+            "Mentale Stimulation ist genauso wichtig wie physische. Spiele mit deinem Hund und trainiere sein Gehirn!"
+        ];
+
+        function openTab(evt, tabName) {
+            const tabContents = document.querySelectorAll(".tab-content");
+            tabContents.forEach(tab => tab.classList.remove("active"));
+            
+            const tabButtons = document.querySelectorAll(".tab-button");
+            tabButtons.forEach(btn => btn.classList.remove("active"));
+            
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        function getDogTip() {
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            document.getElementById("tipText").textContent = randomTip;
+        }
+
+        // Optional: Automatischer Tipp beim Laden
+        window.addEventListener("load", getDogTip);
+    </script>
+</body>
 </html>
