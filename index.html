@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunderatgeber - Alles über deine Hunde</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
+        <style>
         * {
             margin: 0;
             padding: 0;
@@ -14,19 +14,60 @@
 
         body {
             font-family: 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            background: linear-gradient(180deg, #1ade3a 0%, #15c328 50%, #0fb021 100%);
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,50 Q300,0 600,50 T1200,50 L1200,120 L0,120 Z" fill="%231ade3a" opacity="0.3"/></svg>');
+            background-size: 600px 120px;
+            animation: wave 8s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes wave {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-600px);
+            }
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: 50px;
+            left: 0;
+            width: 200%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,60 Q300,10 600,60 T1200,60 L1200,120 L0,120 Z" fill="%230fb021" opacity="0.4"/></svg>');
+            background-size: 600px 120px;
+            animation: wave 6s linear infinite reverse;
+            z-index: 1;
+            pointer-events: none;
         }
 
         header {
-            background: linear-gradient(135deg, #FF8C00 0%, #FF7700 100%);
+            background: linear-gradient(135deg, #1ade3a 0%, #15c328 100%);
             color: white;
             padding: 40px 30px;
             border-radius: 15px;
             text-align: center;
             margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
         }
 
         header h1 {
@@ -42,24 +83,26 @@
             font-weight: 300;
         }
 
-        .container {
+                .container {
             display: flex;
             gap: 25px;
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
         .main-content {
             flex: 1;
             background-color: white;
             border-radius: 15px;
-            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
             overflow: hidden;
         }
 
         .tabs-container {
-            background: linear-gradient(135deg, #FF8C00 0%, #FF7700 100%);
-            padding: 10px;
+            background: linear-gradient(135deg, #1ade3a 0%, #15c328 100%);
+            padding: 15px;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -73,7 +116,7 @@
 
         .dropdown-btn {
             padding: 12px 20px;
-            background-color: #FF8C00;
+            background-color: #1ade3a;
             color: white;
             border: none;
             cursor: pointer;
@@ -88,7 +131,7 @@
         }
 
         .dropdown-btn:hover {
-            background-color: #FF7700;
+            background-color: #15c328;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
@@ -97,9 +140,9 @@
             display: none;
             position: absolute;
             background-color: white;
-            min-width: 200px;
+            min-width: 220px;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-            z-index: 1;
+            z-index: 9999;
             border-radius: 10px;
             top: 100%;
             left: 0;
@@ -135,8 +178,8 @@
             padding-left: 17px;
         }
 
-        .dropdown-content a i {
-            color: #FF8C00;
+                .dropdown-content a i {
+            color: #1ade3a;
             width: 20px;
             text-align: center;
         }
@@ -167,7 +210,7 @@
         }
 
         .tab-content h2 {
-            color: #FF8C00;
+            color: #1ade3a;
             margin-bottom: 25px;
             font-size: 2.2em;
             display: flex;
@@ -180,7 +223,7 @@
         }
 
         .tab-content h3 {
-            color: #FF7700;
+            color: #15c328;
             margin-top: 25px;
             margin-bottom: 15px;
             font-size: 1.4em;
@@ -191,7 +234,7 @@
         }
 
         .tab-content h3 i {
-            color: #FF8C00;
+            color: #1ade3a;
             font-size: 1.2em;
         }
 
@@ -226,7 +269,7 @@
             color: #FF8C00;
         }
 
-        .sidebar {
+                .sidebar {
             width: 280px;
             display: flex;
             flex-direction: column;
@@ -236,20 +279,20 @@
         .dog-container {
             position: fixed;
             right: 20px;
-            bottom: 20px;
-            width: 160px;
-            height: 160px;
+            bottom: 150px;
+            width: 200px;
+            height: 180px;
             background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
             border-radius: 15px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             animation: moveRight 4s infinite;
             cursor: pointer;
-            z-index: 1000;
-            border: 2px solid #FF8C00;
+            z-index: 999;
+            border: 2px solid #1ade3a;
+            overflow: hidden;
         }
 
         @keyframes moveRight {
@@ -261,57 +304,57 @@
             }
         }
 
-        .dog {
-            font-size: 70px;
-            animation: wave 0.6s infinite;
-            margin-bottom: 5px;
+        .dog-body-svg {
+            width: 100%;
+            height: 100%;
+            animation: dogWalk 1.5s ease-in-out infinite;
         }
 
-        @keyframes wave {
+        @keyframes dogWalk {
             0%, 100% {
-                transform: rotate(0deg);
+                transform: translateY(0px);
             }
-            25% {
-                transform: rotate(-8deg);
-            }
-            75% {
-                transform: rotate(8deg);
+            50% {
+                transform: translateY(-5px);
             }
         }
 
         .bandana {
             position: absolute;
-            width: 35px;
+            width: 30px;
             height: 25px;
             background-color: #E63946;
-            top: 22px;
-            left: 12px;
-            border-radius: 6px;
-            transform: rotate(45deg);
+            top: 50px;
+            left: 85px;
+            border-radius: 50%;
             box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+            z-index: 10;
         }
 
         .dog-label {
             font-size: 0.75em;
             text-align: center;
-            color: #FF8C00;
+            color: #1ade3a;
             font-weight: 700;
             letter-spacing: 0.5px;
+            position: absolute;
+            bottom: 5px;
+            width: 100%;
         }
 
-        .tip-box {
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F0 100%);
-            border: 2px solid #FF8C00;
+                .tip-box {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E8F7F5 100%);
+            border: 2px solid #1ade3a;
             border-radius: 12px;
             padding: 20px;
             font-size: 0.95em;
             line-height: 1.7;
             color: #555;
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(26, 222, 58, 0.1);
         }
 
         .tip-box strong {
-            color: #FF8C00;
+            color: #1ade3a;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -320,16 +363,16 @@
         }
 
         .info-box {
-            background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF7 100%);
-            border-left: 4px solid #FF8C00;
+            background: linear-gradient(135deg, #E8F7F5 0%, #F0F9FF 100%);
+            border-left: 4px solid #1ade3a;
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(26, 222, 58, 0.1);
         }
 
         .info-box strong {
-            color: #FF8C00;
+            color: #1ade3a;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -338,7 +381,7 @@
         .feature-image {
             width: 100%;
             height: 300px;
-            background: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);
+            background: linear-gradient(135deg, #1ade3a 0%, #15c328 100%);
             border-radius: 12px;
             margin: 20px 0;
             display: flex;
@@ -346,6 +389,20 @@
             justify-content: center;
             color: white;
             font-size: 4em;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #1ade3a 0%, #15c328 100%);
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3.5em;
             text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
@@ -356,9 +413,9 @@
             margin: 30px 0;
         }
 
-        .anatomy-diagram {
-            background: linear-gradient(135deg, #FFF8F0 0%, #FFFBF7 100%);
-            border: 2px solid #FF8C00;
+                .anatomy-diagram {
+            background: linear-gradient(135deg, #E8F7F5 0%, #F0F9FF 100%);
+            border: 2px solid #1ade3a;
             border-radius: 12px;
             padding: 30px;
             display: flex;
@@ -371,10 +428,10 @@
         .dog-body {
             width: 200px;
             height: 250px;
-            background: linear-gradient(135deg, #FFE4B5 0%, #FFDAB9 100%);
+            background: linear-gradient(135deg, #D4F1E8 0%, #C0ECDD 100%);
             border-radius: 50%;
             position: relative;
-            border: 2px solid #FF8C00;
+            border: 2px solid #1ade3a;
         }
 
         .bone-point, .muscle-point {
@@ -410,7 +467,7 @@
 
         .anatomy-info {
             background: white;
-            border: 2px solid #FF8C00;
+            border: 2px solid #1ade3a;
             border-radius: 12px;
             padding: 25px;
             min-height: 400px;
@@ -420,7 +477,7 @@
         }
 
         .anatomy-info h4 {
-            color: #FF8C00;
+            color: #1ade3a;
             font-size: 1.3em;
             margin-bottom: 10px;
         }
@@ -498,6 +555,10 @@
                     <i class="fas fa-dog"></i>
                 </div>
 
+                                <div class="content-image">
+                    <i class="fas fa-skeleton"></i>
+                </div>
+
                 <h3><i class="fas fa-dna"></i> Interaktive Anatomie</h3>
                 <p>Klicke auf die Punkte im Körper des Hundes, um detaillierte Informationen über Knochen und Muskeln zu erhalten.</p>
                 
@@ -532,6 +593,10 @@
                 
                 <div class="feature-image">
                     <i class="fas fa-chalkboard-user"></i>
+                </div>
+
+                                <div class="content-image">
+                    <i class="fas fa-pawl"></i>
                 </div>
 
                 <h3><i class="fas fa-star"></i> Grundprinzipien</h3>
@@ -570,6 +635,10 @@
                 
                 <div class="feature-image">
                     <i class="fas fa-bowl-food"></i>
+                </div>
+
+                                <div class="content-image">
+                    <i class="fas fa-apple"></i>
                 </div>
 
                 <h3><i class="fas fa-flask-vial"></i> Nährstoffbedarf</h3>
@@ -617,6 +686,10 @@
                 
                 <div class="feature-image">
                     <i class="fas fa-stethoscope"></i>
+                </div>
+
+                                <div class="content-image">
+                    <i class="fas fa-hospital"></i>
                 </div>
 
                 <h3><i class="fas fa-calendar-check"></i> Regelmäßige Vorsorgeuntersuchungen</h3>
@@ -671,6 +744,10 @@
                     <i class="fas fa-spa"></i>
                 </div>
 
+                                <div class="content-image">
+                    <i class="fas fa-water"></i>
+                </div>
+
                 <h3><i class="fas fa-brush"></i> Fellpflege</h3>
                 <ul>
                     <li><strong>Bürsten:</strong> 2-3 mal wöchentlich für kurzhaarige Hunde, täglich für langhaarige</li>
@@ -714,11 +791,36 @@
         </div>
 
                 <div class="sidebar">
-            <div class="dog-container" onclick="getDogTip()">
-                <div class="bandana"></div>
-                <div class="dog">🐶</div>
-                <div class="dog-label">Tipps für dich!</div>
-            </div>
+                    <div class="dog-container" onclick="getDogTip()">
+                        <div class="bandana"></div>
+                        <svg class="dog-body-svg" viewBox="0 0 200 160" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Hinter Beinen -->
+                            <ellipse cx="60" cy="130" rx="15" ry="20" fill="#D4A574"/>
+                            <ellipse cx="120" cy="130" rx="15" ry="20" fill="#D4A574"/>
+                            <!-- Rumpf -->
+                            <ellipse cx="90" cy="80" rx="40" ry="35" fill="#E8C89B"/>
+                            <!-- Vorder Beinen -->
+                            <ellipse cx="70" cy="110" rx="12" ry="22" fill="#C59A78"/>
+                            <ellipse cx="110" cy="110" rx="12" ry="22" fill="#C59A78"/>
+                            <!-- Hals -->
+                            <ellipse cx="90" cy="50" rx="25" ry="28" fill="#D4A574"/>
+                            <!-- Kopf -->
+                            <circle cx="90" cy="30" r="22" fill="#E8C89B"/>
+                            <!-- Schnauze -->
+                            <ellipse cx="90" cy="35" rx="15" ry="12" fill="#D4A574"/>
+                            <!-- Nase -->
+                            <circle cx="90" cy="32" r="5" fill="#000"/>
+                            <!-- Augen -->
+                            <circle cx="80" cy="25" r="3" fill="#000"/>
+                            <circle cx="100" cy="25" r="3" fill="#000"/>
+                            <!-- Ohren -->
+                            <ellipse cx="70" cy="15" rx="8" ry="12" fill="#D4A574"/>
+                            <ellipse cx="110" cy="15" rx="8" ry="12" fill="#D4A574"/>
+                            <!-- Schwanz -->
+                            <path d="M 120 75 Q 140 60 135 40" stroke="#D4A574" stroke-width="12" fill="none"/>
+                        </svg>
+                        <div class="dog-label">Tipps für dich!</div>
+                    </div>
 
             <div class="tip-box" id="tipBox">
                 <strong><i class="fas fa-lightbulb"></i> Hundetipp:</strong>
